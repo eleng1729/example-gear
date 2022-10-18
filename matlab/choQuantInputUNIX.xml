@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<input>
+    <!-- All files referenced are defined relative to the fileroot. If there is no -->
+    <!-- fileroot defined, the files are defined relative to this file. -->
+    <fileroot>/home/xerxes-raid1/bolan/breast4t_nct/data</fileroot>
+    
+    <source-data>
+        <format>VARIANFID</format>
+        <waterref-scan>
+            <scan index="1">raw/s0393-p095-20010809/voxA_water_preGd.fid</scan>
+        </waterref-scan>
+        
+        <metabolite-scan>
+            <scan index="1">raw/s0393-p095-20010809/voxA_2d_preGd.fid</scan>
+        </metabolite-scan>	
+        
+        <!-- Tweak file - manual adjustments to preprocessing and fit -->
+        <!-- If not specified, this will be a file called tweak.xml in -->
+        <!-- the same folder as this input file. Otherwise, this is a file -->
+        <!-- name relative to fileroot -->
+        <!-- <tweak-filename>tweaks/0393-p095-20010809_tweak.xml</tweak-filename> -->
+        
+    </source-data>
+    
+    <output>
+        <!-- normdata, preprocessing, analysis -->
+        <!-- If these are not defined separately, they will be created in output-root -->
+        <output-root>analysis-mrs/s0393-p095-20010809/spectrum-0083-A_post</output-root>
+        <!-- <normalized>normalized/current/s0393-p095-20010809</normalized> -->
+    </output>
+    
+    <options>
+        <generate-plots>true</generate-plots>
+        <plot-format>png</plot-format>
+        <phantom>false</phantom>
+        
+        <waterref-processing>
+            <array-autophase>0</array-autophase>
+            <array-frequency-correction>1</array-frequency-correction>
+            <array-averaging>0</array-averaging>
+            <preprocessing-linebroaden>0</preprocessing-linebroaden>
+            <phase-ref-water>auto</phase-ref-water>
+            <correct-dc>1</correct-dc>
+            <on-resonance-shift>0</on-resonance-shift>
+            <autophase>1</autophase>    
+            <coarse-freq-adj-method>fixed_shift</coarse-freq-adj-method>
+            <!-- <coarse-freq-adj-method>water_dominant</coarse-freq-adj-method> -->
+            <coarse-freq-adj-reference>4.7</coarse-freq-adj-reference>
+            <fine-freq-adj-method>water</fine-freq-adj-method>
+            <fine-freq-adj-reference>4.7</fine-freq-adj-reference>                 
+        </waterref-processing>
+        
+        <metabolite-processing>
+            <array-autophase>1</array-autophase>
+            <array-frequency-correction>1</array-frequency-correction>
+            <array-averaging>1</array-averaging>
+            <preprocessing-linebroaden>0</preprocessing-linebroaden>
+            <phase-ref-water>none</phase-ref-water>
+            <correct-dc>1</correct-dc>
+            <on-resonance-shift>0</on-resonance-shift>
+            <autophase>1</autophase>    
+            <coarse-freq-adj-method>fixed_shift</coarse-freq-adj-method>
+            <coarse-freq-adj-reference>4.7</coarse-freq-adj-reference>
+            <fine-freq-adj-method>none</fine-freq-adj-method>
+            <fine-freq-adj-reference>0</fine-freq-adj-reference>                 
+        </metabolite-processing>
+
+        <!-- can be used to turn off parts of analysis -->
+        <fit-waterref>true</fit-waterref>
+        <fit-metabolite>true</fit-metabolite>
+        
+        <use-measured-watert2-ifavailable>true</use-measured-watert2-ifavailable>
+        
+        <!-- Assumed relaxation and physical parameters -->
+        <water-t1 unit="ms" reference="Baik">746</water-t1>
+        <water-t2 unit="ms" reference="Rakow-Penner">58</water-t2>   
+        
+        <cho-t1 unit="ms" reference="Ave of 1513 (Baik) and 1210 (Tan)">1362</cho-t1>
+        <cho-t2 unit="ms" reference="Mean of 340 (Bakken), 269 (Baik), 181 (Tan)">263</cho-t2> 
+        
+        <!-- this is the dominant 1.3 ppm resonance -->
+        <fat-t1 unit="ms" reference="Haddadin">418</fat-t1>
+        <fat-t2 unit="ms" reference="Rakow-Penner">53</fat-t2>         
+    </options>
+
+</input>
+
+
+
