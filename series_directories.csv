@@ -1,0 +1,8 @@
+num_case,112
+name_case,20110920-ST001-Prostate_112
+name_target,MR-SE010-t2_tse_tra_140fov
+name_tse1,MR-SE012-t2_tse_tra_140fov_Grappa2
+name_tse2,MR-SE014-t2_tse_tra_140fov_Grappa2_TE36
+name_tse3,MR-SE016-t2_tse_tra_140fov_Grappa2_TE142
+name_adc,MR-SE041-ADC_Various_1
+name_dce,MR-SE039-fl3d_vibe_10d_rl_dyn10

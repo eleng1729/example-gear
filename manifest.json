@@ -1,0 +1,57 @@
+{
+  "name": "reg-t2map",
+  "label": "reg-t2map",
+  "description": "registration and t2map",
+  "maintainer": "Ethan Leng",
+  "author": "Ethan Leng",
+  "url": "",
+  "source": "",
+  "license": "Other",
+  "flywheel": "0",
+  "version": "0.0.1",
+  "custom": {
+    "flywheel": {
+      "suite": "TEST"
+    },
+    "gear-builder": {
+      "image": "eleng1729/base:0.0.1",
+      "category": "analysis"
+    }
+  },
+  "inputs": {
+    "series_directories": {
+      "base": "file",
+      "description": "name of directories for entire case",
+      "type": {
+        "enum": [
+          "text"
+        ]
+      }
+    },
+    "data": {
+      "base": "file",
+      "description": "Archive (.zip) of relevant dicoms for entire case",
+      "type": {
+        "enum": [
+          "archive"
+        ]
+      }
+    },
+    "t2map_config": {
+      "base": "file",
+      "description": "XML config for t2map",
+      "type": {
+        "enum": [
+          "text"
+        ]
+      }
+    }
+  },
+  "config": {},
+  "environment": {
+    "FLYWHEEL": "/flywheel/v0",
+    "LD_LIBRARY_PATH": "/opt/mcr/v911/runtime/glnxa64:/opt/mcr/v911/bin/glnxa64:/opt/mcr/v911/sys/os/glnxa64:/opt/mcr/v911/extern/bin/glnxa64",
+    "XAPPLRESDIR": "XAPPLRESDIR"
+  },
+  "command": "bash wrapper.sh"
+}

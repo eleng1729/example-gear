@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<input>
+	<!-- Describe the type of processing expected -->
+	<processing>
+		<type>T2MapFit</type>
+	</processing>
+
+    <!-- All files referenced are defined relative to the fileroot. If there is no -->
+    <!-- fileroot defined, the files are defined relative to this xml file -->
+	<fileroot>/flywheel/v0/output/reg</fileroot>
+    
+    <source-data>
+        <format>dicom-series</format>
+        <!-- If there's only 1, assume it is 4D, including multi TEs -->
+		<!-- <name index="1">MR-SE029-se_mc_19sl</name> -->
+		
+        <!-- If there's more than 1, assume its one TE per series. E.g.: -->
+		<name index="1">TSE1_MR-SE012-t2_tse_tra_140fov_Grappa2</name>
+		<name index="2">TSE2_MR-SE014-t2_tse_tra_140fov_Grappa2_TE36</name>
+        <name index="3">TSE3_MR-SE016-t2_tse_tra_140fov_Grappa2_TE142</name>
+    </source-data>
+    
+    <output>
+		<!-- All output files will be placed here (relative to fileroot) -->
+        <output-root>T2MAP</output-root>
+		
+		<!-- There are two directories generated, analysis and generated-dicom. -->
+		<!-- If not specified, these will be created under output-root. -->
+		<!-- Alternatively they can be explicit again relative to fileroot): -->
+		<!-- <analysis>matlab-files</analysis> -->
+    </output>
+    
+    <options>
+        <generate-T2-dicom>true</generate-T2-dicom>
+        <generate-M0-dicom>true</generate-M0-dicom>
+		
+		<!-- Often the first echoes in a ms_mc series are bad. -->
+        <!-- <discard-first-N-echoes>1</discard-first-N-echoes> -->
+        
+		<!-- Masking reduces fitting time and gives cleaner results -->
+        <noisemask>
+            <!-- Uses Otsu's (graythresh) method but with scale factor -->
+            <!-- value==1 gives true Otsu; <1 adds more pixels -->
+            <method>otsu</method>
+            <value>0.5</value> 
+            
+            <!-- Alternate is method=snr, default value=15 --> 
+            <!-- <method>snr</method> -->
+            <!-- <value>20</value> -->
+        </noisemask>
+        
+        <!-- Filtering prior to fitting gives some smoothing and denoising. -->
+		<!-- true or false. This is an edge-preserving filter (median) -->
+        <median-filter>false</median-filter>
+        
+        <!-- Fitting -->
+        <fitting>
+            <!-- model options include linear, exp2, exp2+noise, exp3. Later: biexp? -->
+            <model>linear</model>
+            
+            <!-- These sometimes need to be tuned. See Matlab lsqnonlin --> 
+			<!-- ignored for linear, which is not iterative -->
+            <TolX>0.000001</TolX>
+            <TolFun>0.000001</TolFun>
+        </fitting>
+        
+    </options>
+
+</input>
+
+
+
+
